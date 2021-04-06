@@ -43,9 +43,6 @@ def listfiles(path, headers):
     uri = URL_TEMPLATE.format(path)
     
     logging.debug("listfiles(): Listing Remote Path: %s",path)
-    
-    # To test unauthorized request
-    #headers = {"Authorization" :"bearer dummy", "Content-Type" : "application/json"}
 
     page_number = 0
     retry_count=0

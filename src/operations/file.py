@@ -40,9 +40,6 @@ def file_details(path, headers):
     uri = URL_TEMPLATE.format(path)
     
     logging.debug("file_details(): File details for file: %s",path)
-    
-    # To test unauthorized request
-    #headers = {"Authorization" :"bearer dummy", "Content-Type" : "application/json"}
 
     response = https_get(uri, headers=headers)
     

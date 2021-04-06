@@ -225,8 +225,6 @@ class onedrive_simple_sdk:
         return result
 
 
-
-
     def rename(self, filePathOriginal, filePathDestination):
         loggin.error("rename(): Operation is not implemented")
         return None

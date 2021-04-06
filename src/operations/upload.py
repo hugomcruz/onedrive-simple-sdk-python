@@ -39,8 +39,6 @@ FILE_DOWNLOAD_BUFFER = 1024*10
 MULTIPART_UPLOAD_CHUNK = 1024 * 1024 * 5  #Probably create a dynamic chunk size depending on the size of the file. 
 LOCAL_WRITE_CHUNCK = 1024*10
 
-# TODO - Change and tune the upload chuncks. Set to 5MB for testing. 
-
 def upload(local_file, destination_path, headers='', exists='fail'):
     logging.debug("upload(): Starting upload operation...")
 
@@ -56,8 +54,8 @@ def upload(local_file, destination_path, headers='', exists='fail'):
     original_file_quoted = urllib.parse.quote(original_file)
 
     # Condition to decide the type of upload:
-    # File < 4MB - direct single upload
-    # File > 4MB - multi part upload
+    # File < 5MB - direct single upload
+    # File > 5MB - multi part upload
     if(size > UPLOAD_MULTIPART_THRESHOLD):
         #Multipart upload
         logging.debug("File is larger then theshold. Starting multipart upload.")

@@ -23,11 +23,6 @@
 '''
 
 import sys
-sys.path.append('/Users/hcruz/Documents/development/python/onedrive_simple_sdk/src')
-sys.path.append('/root/dev/onedrive_simple_sdk/src')
-
- 
-
 import os
 import time
 import json
@@ -72,7 +67,7 @@ else:
     #### ---- ####
     
     ## Read the configuration file with the IDs and refresh tokens.
-    with open('credentials_hugo.json') as json_file:
+    with open('credentials.json') as json_file:
         data = json.load(json_file)
         refreshToken = data["refreshToken"]
         clientSecret = data["clientSecret"]
