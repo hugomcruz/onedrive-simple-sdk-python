@@ -48,13 +48,14 @@ def https_get(uri, headers='', body='', retry=3):
     
     url_data = urllib.parse.urlparse(uri)
     host = url_data.netloc
+    path = url_data.path
 
     last_error = ""
  
     while(True):     
         try:
             connection = http.client.HTTPSConnection(host)
-            connection.request("GET", uri,  headers=headers, body=body)
+            connection.request("GET", path,  headers=headers, body=body)
             response = connection.getresponse()
             
             # Returned Headers
@@ -92,12 +93,13 @@ def https_post(uri, headers, body, retry=3):
     logging.debug("https_post(): Starting HTTPS POST")
 
     url_data = urllib.parse.urlparse(uri)
-    host = url_data.netloc     
+    host = url_data.netloc
+    path = url_data.path    
 
     while(True):
         try:
             connection = http.client.HTTPSConnection(host)
-            connection.request("POST", uri,  headers=headers, body=body)
+            connection.request("POST", path,  headers=headers, body=body)
             response = connection.getresponse()
             data = response.read()
             reply = Payload(response.status, response.reason, data)
@@ -127,11 +129,12 @@ def https_put(uri, headers, body, retry=3):
 
     url_data = urllib.parse.urlparse(uri)
     host = url_data.netloc
+    path = url_data.path
 
     while(True):
         try:
             connection = http.client.HTTPSConnection(host)
-            connection.request("PUT", uri,  headers=headers, body=body)
+            connection.request("PUT", path,  headers=headers, body=body)
             response = connection.getresponse()
             data = response.read()
             reply = Payload(response.status, response.reason, data)
@@ -170,10 +173,9 @@ def https_delete(uri, headers='', body=''):
     url_data = urllib.parse.urlparse(uri)
     host = url_data.netloc
     path = url_data.path
-    path = urllib.parse.quote(path)       
 
     connection = http.client.HTTPSConnection(host)
-    connection.request("DELETE", uri,  headers=headers, body=body)
+    connection.request("DELETE", path,  headers=headers, body=body)
     response = connection.getresponse()
     return response
 

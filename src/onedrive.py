@@ -242,7 +242,7 @@ class onedrive_simple_sdk:
 
     def delete(self,file_path):
         self.checkExpiredToken()
-        headers = {"Authorization": self.token_type + " " + self.access_token}
+        headers = {"Authorization": self.token_type + " " + self.access_token, "Content-Type" : "application/json"}
         file_path = urllib.parse.quote(file_path)
         result = delete(file_path, headers)
         return result
