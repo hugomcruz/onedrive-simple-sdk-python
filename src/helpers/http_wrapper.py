@@ -48,14 +48,20 @@ def https_get(uri, headers='', body='', retry=3):
     
     url_data = urllib.parse.urlparse(uri)
     host = url_data.netloc
-    path = url_data.path
+
+
+
+    # Added to pass the queries. 
+    # When we removed the entire URL from the request we put only the PATH. But it is necessary to also pass the QUERY
+    # To fix ISSUE #2
+    url_locator = gen_url_locator(url_data.path, url_data.query)
 
     last_error = ""
  
     while(True):     
         try:
             connection = http.client.HTTPSConnection(host)
-            connection.request("GET", path,  headers=headers, body=body)
+            connection.request("GET", url_locator,  headers=headers, body=body)
             response = connection.getresponse()
             
             # Returned Headers
@@ -94,12 +100,14 @@ def https_post(uri, headers, body, retry=3):
 
     url_data = urllib.parse.urlparse(uri)
     host = url_data.netloc
-    path = url_data.path    
+    
+    # Added while fixing ISSUE #2 for consistency
+    url_locator = gen_url_locator(url_data.path, url_data.query)  
 
     while(True):
         try:
             connection = http.client.HTTPSConnection(host)
-            connection.request("POST", path,  headers=headers, body=body)
+            connection.request("POST", url_locator,  headers=headers, body=body)
             response = connection.getresponse()
             data = response.read()
             reply = Payload(response.status, response.reason, data)
@@ -129,12 +137,14 @@ def https_put(uri, headers, body, retry=3):
 
     url_data = urllib.parse.urlparse(uri)
     host = url_data.netloc
-    path = url_data.path
+
+    # Added while fixing ISSUE #2 for consistency
+    url_locator = gen_url_locator(url_data.path, url_data.query)
 
     while(True):
         try:
             connection = http.client.HTTPSConnection(host)
-            connection.request("PUT", path,  headers=headers, body=body)
+            connection.request("PUT", url_locator,  headers=headers, body=body)
             response = connection.getresponse()
             data = response.read()
             reply = Payload(response.status, response.reason, data)
@@ -172,10 +182,24 @@ def https_delete(uri, headers='', body=''):
     
     url_data = urllib.parse.urlparse(uri)
     host = url_data.netloc
-    path = url_data.path
+    
+    # Added while fixing ISSUE #2 for consistency
+    url_locator = gen_url_locator(url_data.path, url_data.query)
 
     connection = http.client.HTTPSConnection(host)
-    connection.request("DELETE", path,  headers=headers, body=body)
+    connection.request("DELETE", url_locator,  headers=headers, body=body)
     response = connection.getresponse()
     return response
 
+
+# Added function to build URL Locator
+# ISSUE #2
+def gen_url_locator(path, query=None):
+    
+    url = None
+    if(query == "" or query == None):
+        url = path
+    else:
+        url = path + "?" + query
+
+    return url
