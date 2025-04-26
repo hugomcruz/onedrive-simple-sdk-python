@@ -153,7 +153,7 @@ class onedrive_simple_sdk:
         self.driveId = dataParsed["id"]
         self.driveType = dataParsed["driveType"]
         self.ownerDisplayName = dataParsed["owner"]["user"]["displayName"]
-        self.ownerId = dataParsed["owner"]["user"]["id"]
+        #self.ownerId = dataParsed["owner"]["user"]["id"]
         self.quotaDeleted = dataParsed["quota"]["deleted"]
         self.quotaRemaining = dataParsed["quota"]["remaining"]
         self.quotaState = dataParsed["quota"]["state"]
@@ -167,7 +167,7 @@ class onedrive_simple_sdk:
         print("Drive ID    :", self.driveId)
         print("Drive Type  : " + self.driveType)
         print("Display Name: " + self.ownerDisplayName)
-        print("Owner ID    : " + self.ownerId)
+        #print("Owner ID    : " + self.ownerId)
         print("> Quota:") 
         print("Deleted  :", self.quotaDeleted)
         print("Remaining:", self.quotaRemaining)
