@@ -69,7 +69,10 @@ def listfiles(path, headers):
             data_parsed = json.loads(response.get_payload())
 
             logging.debug("listfiles() - Page Number: %s", page_number)
-            number_items = data_parsed["@odata.count"]
+            # In some uders the odata cound does not exit. 
+            # Using the array count to obtain the number of elements.
+            #number_items = data_parsed["@odata.count"]
+            number_items = len(data_parsed["value"])
             logging.debug("listfiles() - Total Items: %s", number_items)
 
             next_link = None
