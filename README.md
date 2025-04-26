@@ -7,3 +7,6 @@ First Commit to Github on 7-Mar-2021.
 It contains basic functionality. Fully working on the operations currently implemented. Some operations like copy or move within Onedrive are not implemented at the moment. 
 
 Python Module is also not ready yet. 
+
+
+Minor fixes on 26-Apr-2025 as for some users the API was not working. 
