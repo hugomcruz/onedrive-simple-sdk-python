@@ -66,7 +66,7 @@ def upload(local_file, destination_path, headers='', exists='fail'):
         
         body = {
                     "item": {
-                    "@odata.type": "microsoft.graph.driveItemUploadableProperties",
+                    #"@odata.type": "microsoft.graph.driveItemUploadableProperties",
                     "@microsoft.graph.conflictBehavior": exists,
                     "name": original_file
                     }
